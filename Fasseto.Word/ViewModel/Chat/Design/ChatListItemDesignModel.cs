@@ -22,10 +22,11 @@
         /// </summary>
         public ChatListItemDesignModel()
         {
-            Initials = "LM";
-            Name = "Luke";
+            Initials = "LZ";
+            Name = "Amine";
             Message = "This chat app is awesome! I bet it will be fast too";
             ProfilePictureRGB = "3099c5";
+            NewContentAvailable = true;
         }
 
         #endregion

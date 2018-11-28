@@ -27,6 +27,11 @@ namespace Fasseto.Word
         /// </summary>
         public string ProfilePictureRGB { get; set; }
 
+        /// <summary>
+        /// True if there are unread messages on chat
+        /// </summary>
+        public bool NewContentAvailable { get; set; }
+
 
     }
 }
