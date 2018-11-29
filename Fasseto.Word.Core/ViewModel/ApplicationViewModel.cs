@@ -9,7 +9,7 @@ namespace Fasseto.Word.Core
     /// <summary>
     /// The application state as a View Model
     /// </summary>
-    public class ApplicationViewModel
+    public class ApplicationViewModel : BaseViewModel
     {
         /// <summary>
         /// The current page of the application
