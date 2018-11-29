@@ -1,4 +1,4 @@
-﻿namespace Fasseto.Word
+﻿namespace Fasseto.Word.Core
 {
 
     /// <summary>
@@ -14,6 +14,11 @@
         /// <summary>
         /// The chat page
         /// </summary>
-        Chat = 1
+        Chat = 1,
+
+        /// <summary>
+        /// The register page
+        /// </summary>
+        Register = 2,
     }
 }

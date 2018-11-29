@@ -1,16 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Text;
+﻿using System.Security;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Fasseto.Word
+namespace Fasseto.Word.Core
 {
     /// <summary>
     /// The View Model for a login screen
@@ -33,7 +25,15 @@ namespace Fasseto.Word
 
         #region Commands
 
+        /// <summary>
+        /// The command to login
+        /// </summary>
         public ICommand LoginCommand { get; set; }
+
+        /// <summary>
+        /// The command to register for a new account
+        /// </summary>
+        public ICommand RegisterCommand { get; set; }
 
         #endregion
 
@@ -42,7 +42,8 @@ namespace Fasseto.Word
         public LoginViewModel()
         {
             //Create one command
-            LoginCommand = new RelayParamCommand(async (parameter) => await Login(parameter));
+            LoginCommand = new RelayParamCommand(async (parameter) => await LoginAsync(parameter));
+            RegisterCommand = new RelayCommand(async () => await RegisterAsync());
         }
 
         /// <summary>
@@ -50,17 +51,30 @@ namespace Fasseto.Word
         /// </summary>
         /// <param name="parameter">The <see cref="SecureString"/> passed from the view for the users password</param>
         /// <returns></returns>
-        public async Task Login(object parameter)
+        public async Task LoginAsync(object parameter)
         {
 
-            await RunCommand(() => this.LoginIsRunning, async () =>
+            await RunCommandAsync(() => LoginIsRunning, async () =>
             {
                 await Task.Delay(5000);
 
-                var email = this.Email;
+                var email = Email;
                 var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
             });
             
+        }
+
+        /// <summary>
+        /// Takes the user to the register page
+        /// </summary>
+        /// <param name="parameter">The <see cref="SecureString"/> passed from the view for the users password</param>
+        /// <returns></returns>
+        public async Task RegisterAsync()
+        {
+            //TODO: Go to register page?
+            //((WindowViewModel)((MainWindow)Application.Current.MainWindow).DataContext).CurrentPage = ApplicationPage.Register;
+
+            await Task.Delay(1);
         }
 
         #endregion

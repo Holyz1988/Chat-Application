@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fasseto.Word"
+             xmlns:core="clr-namespace:Fasseto.Word.Core"
              mc:Ignorable="d" 
              Height="60"
              d:DesignHeight="60" d:DesignWidth="300">
@@ -13,57 +14,64 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ContentControl}">
-                        
+
                         <!--  -->
-                        <Grid x:Name="container" Background="{StaticResource ForegroundLightBrush}">
-                            <Grid.ColumnDefinitions>
-                                <!-- New message indicator bar -->
-                                <ColumnDefinition Width="auto" />
-                                <!-- Profile picture -->
-                                <ColumnDefinition Width="auto" />
-                                <!-- Main content -->
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                        <Border x:Name="background" Background="{StaticResource ForegroundLightBrush}">
+                            <Grid x:Name="container" Background="Transparent">
+                                <Grid.ColumnDefinitions>
+                                    <!-- New message indicator bar -->
+                                    <ColumnDefinition Width="auto" />
+                                    <!-- Profile picture -->
+                                    <ColumnDefinition Width="auto" />
+                                    <!-- Main content -->
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <!-- New message Indicator bar -->
-                            <Border Grid.Column="0" Background="Red" Width="4" Visibility="{Binding NewContentAvailable, Converter={local:BooleanToVisibilityConverter}}"/>
+                                <!-- New message Indicator bar -->
+                                <Border Grid.Column="0" Background="Red" Width="4" Visibility="{Binding NewContentAvailable, Converter={local:BooleanToVisibilityConverter}, ConverterParameter=true}"/>
 
-                            <!-- Profile picture padding -->
-                            <Border Grid.Column="1" Padding="8">
-                                <!-- Profile picture background -->
-                                <Border Background="{Binding ProfilePictureRGB, Converter={local:StringRBGToBrushConverter}}"
+                                <!-- Profile picture padding -->
+                                <Border Grid.Column="1" Padding="8">
+                                    <!-- Profile picture background -->
+                                    <Border Background="{Binding ProfilePictureRGB, Converter={local:StringRBGToBrushConverter}}"
                                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                                         CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
-                                    <!-- Profile picture initials -->
-                                    <TextBlock Text="{Binding Initials}"
+                                        <!-- Profile picture initials -->
+                                        <TextBlock Text="{Binding Initials}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                FontSize="{StaticResource FontSizeAverage}"
                                                FontFamily="{StaticResource LatoRegular}"
                                                Foreground="{StaticResource ForegroundLightBrush}"/>
 
+                                    </Border>
                                 </Border>
-                            </Border>
 
-                            <!-- Main content -->
-                            <Border Grid.Column="2" Padding="0 0 8 0">
-                                <StackPanel  VerticalAlignment="Center">
-                                    <!-- Name -->
-                                    <TextBlock Text="{Binding Name}"
+                                <!-- Main content -->
+                                <Border Grid.Column="2" Padding="0 0 8 0">
+                                    <StackPanel  VerticalAlignment="Center">
+                                        <!-- Name -->
+                                        <TextBlock Text="{Binding Name}"
                                                FontFamily="{StaticResource LatoRegular}"
                                                Foreground="{StaticResource WordBlueBrush}"/>
-                                    <!-- Message -->
-                                    <TextBlock Text="{Binding Message}"
+                                        <!-- Message -->
+                                        <TextBlock Text="{Binding Message}"
                                                Foreground="{StaticResource ForegroundDarkBrush}"
                                                TextTrimming="WordEllipsis"
                                                FontFamily="{StaticResource LatoRegular}"/>
-                                </StackPanel>
-                            </Border>
+                                    </StackPanel>
+                                </Border>
 
-                        </Grid>
+                            </Grid>
+                        </Border>
 
                         <!-- Hover effect -->
                         <ControlTemplate.Triggers>
+
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter Property="Background" TargetName="background" Value="{StaticResource WordVeryLightBlueBrush}" />
+                            </DataTrigger>
+
                             <EventTrigger RoutedEvent="MouseEnter">
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -78,7 +86,7 @@
                             <EventTrigger RoutedEvent="MouseLeave">
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation To="{StaticResource ForegroundLight}" 
+                                        <ColorAnimation To="Transparent" 
                                                         Duration="0:0:0.3" 
                                                         Storyboard.TargetName="container"
                                                         Storyboard.TargetProperty="Background.Color" />
@@ -99,7 +107,7 @@
         </Style>
     </UserControl.Resources>
 
-    <ContentControl d:DataContext="{x:Static local:ChatListItemDesignModel.Instance}" 
+    <ContentControl d:DataContext="{x:Static core:ChatListItemDesignModel.Instance}" 
                     Style="{StaticResource ContentStyle}"/>
 
 

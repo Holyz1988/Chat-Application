@@ -5,7 +5,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fasseto.Word
+namespace Fasseto.Word.Core
 {
     /// <summary>
     /// An interface for a class that can provide a secure password

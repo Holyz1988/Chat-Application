@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fasseto.Word"
+        xmlns:core="clr-namespace:Fasseto.Word.Core;assembly=Fasseto.Word.Core"
         mc:Ignorable="d"
         Icon="Images/Logo/logo-small.png"
         WindowStyle="None"
+        x:Name="AppWindow"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         Title="Welcome, friend!"
@@ -124,7 +126,8 @@
                 <ImageBrush TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Backgrounds/emoji-background.png" />
             </Grid.Background>
 
-            <Frame Grid.Column="1" x:Name="MainFrame" Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}" />
+            <Frame Grid.Column="1" x:Name="MainFrame"
+                   Content="{Binding ApplicationViewModel.CurrentPage, ElementName=AppWindow, Converter={local:ApplicationPageValueConverter}}" />
 
             <!-- Side Menu -->
             <local:SideMenuControl>

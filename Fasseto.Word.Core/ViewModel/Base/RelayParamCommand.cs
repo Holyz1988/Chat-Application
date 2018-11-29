@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Fasseto.Word
+namespace Fasseto.Word.Core
 {
     /// <summary>
     /// a basic command that runs an action
@@ -13,7 +13,7 @@ namespace Fasseto.Word
         /// <summary>
         /// The action to run
         /// </summary>
-        private Action<object> _action;
+        private readonly Action<object> _action;
 
         #endregion
 

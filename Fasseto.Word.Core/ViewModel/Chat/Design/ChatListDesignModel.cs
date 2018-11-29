@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Fasseto.Word
+namespace Fasseto.Word.Core
 
 {
     /// <summary>
@@ -66,7 +66,7 @@ namespace Fasseto.Word
                     Message = "Hey dude, here are the new icons",
                     ProfilePictureRGB = "fe4503",
                     NewContentAvailable = false,
-
+                    IsSelected = true,  
                 },
                 new ChatListItemViewModel
                 {

@@ -1,12 +1,7 @@
-﻿
+﻿using Fasseto.Word.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Fasseto.Word
@@ -27,7 +22,7 @@ namespace Fasseto.Word
         /// <summary>
         /// The window resizer helper that keeps the window size correct in various states
         /// </summary>
-        private WindowResizer _windowResizer;
+        private readonly WindowResizer _windowResizer;
 
         /// <summary>
         /// The margin around the window to allow a drop shadow
@@ -39,13 +34,11 @@ namespace Fasseto.Word
         /// </summary>
         private int _windowRadius = 10;
 
-        private WindowDockPosition _DockPosition = WindowDockPosition.Undocked;
+        private readonly WindowDockPosition _DockPosition = WindowDockPosition.Undocked;
     
         #endregion
 
         #region Public Properties
-
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Chat;
 
         /// <summary>
         /// The smallest width the main window can go to 

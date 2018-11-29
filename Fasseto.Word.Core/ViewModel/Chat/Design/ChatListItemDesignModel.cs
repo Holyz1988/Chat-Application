@@ -1,4 +1,4 @@
-﻿namespace Fasseto.Word
+﻿namespace Fasseto.Word.Core
 
 {
     /// <summary>

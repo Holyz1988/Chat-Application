@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fasseto.Word
+namespace Fasseto.Word.Core
 {
     /// <summary>
     /// A helper for expressions

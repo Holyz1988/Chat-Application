@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-namespace Fasseto.Word
+namespace Fasseto.Word.Core
 {
     /// <summary>
     /// a view model for the overview chat list

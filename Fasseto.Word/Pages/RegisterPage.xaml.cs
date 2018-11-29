@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,17 +18,18 @@ using System.Windows.Shapes;
 namespace Fasseto.Word
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour RegisterPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegisterPage : BasePage<LoginViewModel>, IHavePassword
     {
-        public ApplicationViewModel ApplicationViewModel => new ApplicationViewModel();
-
-        public MainWindow()
+        public RegisterPage()
         {
             InitializeComponent();
-
-            DataContext = new WindowViewModel(this);
         }
+
+        /// <summary>
+        /// The secure password for this login page
+        /// </summary>
+        public SecureString SecurePassword => PasswordText.SecurePassword;
     }
 }

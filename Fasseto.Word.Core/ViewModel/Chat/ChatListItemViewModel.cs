@@ -1,5 +1,5 @@
 ﻿
-namespace Fasseto.Word
+namespace Fasseto.Word.Core
 {
     /// <summary>
     /// a view model for each chat list item in the overview chat list
@@ -31,6 +31,11 @@ namespace Fasseto.Word
         /// True if there are unread messages on chat
         /// </summary>
         public bool NewContentAvailable { get; set; }
+
+        /// <summary>
+        /// True if this item is currently selected
+        /// </summary>
+        public bool IsSelected { get; set; }
 
 
     }
