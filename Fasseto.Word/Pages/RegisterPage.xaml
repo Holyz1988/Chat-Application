@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Fasseto.Word"
-      xmlns:core="clr-namespace:Fasseto.Word.Core"
+      xmlns:core="clr-namespace:Fasseto.Word.Core;assembly=Fasseto.Word.Core"
       mc:Ignorable="d" 
       x:Name="Page"
       d:DesignHeight="600" d:DesignWidth="600"

@@ -13,7 +13,15 @@ namespace Fasseto.Word
     {
         #region Public Events
 
+        /// <summary>
+        /// Fired when the value changes
+        /// </summary>
         public event Action<DependencyObject, DependencyPropertyChangedEventArgs> ValueChanged = (sender, e) => { };
+
+        /// <summary>
+        /// Fired when the value changes
+        /// </summary>
+        public event Action<DependencyObject, object> ValueUpdated = (sender, value) => { };
 
         #endregion
 
@@ -32,7 +40,14 @@ namespace Fasseto.Word
         /// the attached propertie for this class
         /// </summary>
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.RegisterAttached("Value", typeof(Property), typeof(BaseAttachedPropertiy<Parent, Property>), new PropertyMetadata(new PropertyChangedCallback(OnValuePropertyChanged)));
+            DependencyProperty.RegisterAttached("Value",
+                typeof(Property),
+                typeof(BaseAttachedPropertiy<Parent, Property>),
+                new PropertyMetadata(
+                    default(Property),
+                    new PropertyChangedCallback(OnValuePropertyChanged),
+                    new CoerceValueCallback(OnValuePropertyUpdated)
+                    ));
 
         /// <summary>
         /// The classback event when the <see cref="ValueProperty"/> has changed
@@ -46,6 +61,22 @@ namespace Fasseto.Word
 
             //Call event listeners
             Instance.ValueChanged(d, e);
+        }
+
+        /// <summary>
+        /// The classback event when the <see cref="ValueProperty"/> is changed, even if it is the same value
+        /// </summary>
+        /// <param name="d">The UI element that had it's property changed</param>
+        /// <param name="e">The argument for the event</param>
+        private static object OnValuePropertyUpdated(DependencyObject d, object value)
+        {
+            //Call the parent function
+            Instance.OnValueUpdated(d, value);
+
+            //Call event listeners
+            Instance.ValueUpdated(d, value);
+
+            return value;
         }
 
         /// <summary>
@@ -72,6 +103,13 @@ namespace Fasseto.Word
         /// <param name="sender">The UI element that this property was changed for</param>
         /// <param name="e">the arguments for that event</param>
         public virtual void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) { }
+
+        /// <summary>
+        /// The method that is called when any attached propertie of this type is changed
+        /// </summary>
+        /// <param name="sender">The UI element that this property was changed for</param>
+        /// <param name="e">the arguments for that event</param>
+        public virtual void OnValueUpdated(DependencyObject sender, object value) { }
 
         #endregion
     }
