@@ -99,7 +99,7 @@ namespace Fasseto.Word
     /// <summary>
     /// A base page with added ViewModel support
     /// </summary>
-    public class BasePage<VM> : Page
+    public class BasePage<VM> : BasePage
         where VM: BaseViewModel, new()
     {
         #region Private Member
