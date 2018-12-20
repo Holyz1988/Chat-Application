@@ -8,8 +8,8 @@ namespace Fasseto.Word
     /// </summary>
     /// <typeparam name="Parent">The parent class to be the attached property</typeparam>
     /// <typeparam name="Property">The type of this attached property</typeparam>
-    public abstract class BaseAttachedPropertiy<Parent, Property>
-        where Parent: BaseAttachedPropertiy<Parent, Property>, new()
+    public abstract class BaseAttachedProperty<Parent, Property>
+        where Parent:  new()
     {
         #region Public Events
 
@@ -42,7 +42,7 @@ namespace Fasseto.Word
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.RegisterAttached("Value",
                 typeof(Property),
-                typeof(BaseAttachedPropertiy<Parent, Property>),
+                typeof(BaseAttachedProperty<Parent, Property>),
                 new PropertyMetadata(
                     default(Property),
                     new PropertyChangedCallback(OnValuePropertyChanged),
@@ -50,17 +50,17 @@ namespace Fasseto.Word
                     ));
 
         /// <summary>
-        /// The classback event when the <see cref="ValueProperty"/> has changed
+        /// The callback event when the <see cref="ValueProperty"/> has changed
         /// </summary>
         /// <param name="d">The UI element that had it's property changed</param>
         /// <param name="e">The argument for the event</param>
         private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             //Call the parent function
-            Instance.OnValueChanged(d, e);
+            (Instance as BaseAttachedProperty<Parent, Property>)?.OnValueChanged(d, e);
 
             //Call event listeners
-            Instance.ValueChanged(d, e);
+            (Instance as BaseAttachedProperty<Parent, Property>)?.ValueChanged(d, e);
         }
 
         /// <summary>
@@ -71,10 +71,10 @@ namespace Fasseto.Word
         private static object OnValuePropertyUpdated(DependencyObject d, object value)
         {
             //Call the parent function
-            Instance.OnValueUpdated(d, value);
+            (Instance as BaseAttachedProperty<Parent, Property>)?.OnValueUpdated(d, value);
 
             //Call event listeners
-            Instance.ValueUpdated(d, value);
+            (Instance as BaseAttachedProperty<Parent, Property>)?.ValueUpdated(d, value);
 
             return value;
         }

@@ -6,7 +6,7 @@ namespace Fasseto.Word
     /// <summary>
     /// The MonitorPassword property for a <see cref="PasswordBox"/>
     /// </summary>
-    public class MonitorPasswordProperty : BaseAttachedPropertiy<MonitorPasswordProperty, bool>
+    public class MonitorPasswordProperty : BaseAttachedProperty<MonitorPasswordProperty, bool>
     {
         public override void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -44,7 +44,7 @@ namespace Fasseto.Word
     /// <summary>
     /// The HasText Attached property for a <see cref="PasswordBox"/>
     /// </summary>
-    public class HasTextProperty : BaseAttachedPropertiy<HasTextProperty, bool>
+    public class HasTextProperty : BaseAttachedProperty<HasTextProperty, bool>
     {
         /// <summary>
         /// Sets the HasText property based on if the caller <see cref="PasswordBox"/> has any text

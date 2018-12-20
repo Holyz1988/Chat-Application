@@ -7,8 +7,8 @@ namespace Fasseto.Word
     /// and a reverse animation when set to false
     /// </summary>
     /// <typeparam name="Parent"></typeparam>
-    public abstract class AnimateBaseProperty<Parent> : BaseAttachedPropertiy<Parent, bool>
-        where Parent : BaseAttachedPropertiy<Parent, bool>, new()
+    public abstract class AnimateBaseProperty<Parent> : BaseAttachedProperty<Parent, bool>
+        where Parent : BaseAttachedProperty<Parent, bool>, new()
     {
         #region Public Properties
 

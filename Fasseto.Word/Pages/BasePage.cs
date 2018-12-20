@@ -8,15 +8,8 @@ namespace Fasseto.Word
     /// <summary>
     /// A base page for all pages to gain base functionality
     /// </summary>
-    public class BasePage<VM> : Page
-        where VM: BaseViewModel, new()
+    public class BasePage : Page
     {
-        #region Private Member
-
-        private VM _viewModel;
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -34,26 +27,6 @@ namespace Fasseto.Word
         /// </summary>
         public float SlideSeconds { get; set; } = 0.9f;
 
-        /// <summary>
-        /// The ViewModel associated with this page
-        /// </summary>
-        public VM ViewModel
-        {
-            get => ViewModel;
-            set
-            {
-                // If nothing has changed, return
-                if (_viewModel == value)
-                    return;
-
-                //Update the value
-                _viewModel = value;
-
-                //Set the datacontext for this page
-                this.DataContext = _viewModel;
-            }
-        }
-
         #endregion
 
         #region Constructor
@@ -67,9 +40,6 @@ namespace Fasseto.Word
                 Visibility = Visibility.Collapsed;
             //Listen out for the page loading
             Loaded += BasePage_LoadedAsync;
-
-            // Create a default ViewModel
-            ViewModel = new VM();
         }
 
         #endregion
@@ -124,6 +94,55 @@ namespace Fasseto.Word
         }
 
         #endregion
+    }
 
+    /// <summary>
+    /// A base page with added ViewModel support
+    /// </summary>
+    public class BasePage<VM> : Page
+        where VM: BaseViewModel, new()
+    {
+        #region Private Member
+
+        private VM _viewModel;
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// The ViewModel associated with this page
+        /// </summary>
+        public VM ViewModel
+        {
+            get => ViewModel;
+            set
+            {
+                // If nothing has changed, return
+                if (_viewModel == value)
+                    return;
+
+                //Update the value
+                _viewModel = value;
+
+                //Set the datacontext for this page
+                DataContext = _viewModel;
+            }
+        }
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public BasePage()
+        {
+            // Create a default ViewModel
+            ViewModel = new VM();
+        }
+
+        #endregion
     }
 }
